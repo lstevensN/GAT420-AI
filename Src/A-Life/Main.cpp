@@ -2,6 +2,7 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "CA.h"
+#include "GameOfLife.h"
 
 #include <glm/glm.hpp>
 #include <iostream>
@@ -21,7 +22,7 @@ int main(int, char**)
 	std::shared_ptr<Texture> texture = std::make_unique<Texture>(env_size.x, env_size.y, renderer);
 
 	// create environment
-	std::unique_ptr<Environment> env = std::make_unique<CA>(env_size.x, env_size.y, texture);
+	std::unique_ptr<Environment> env = std::make_unique<GameOfLife>(env_size.x, env_size.y, texture);
 	env->Initialize();
 
 	bool quit = false;

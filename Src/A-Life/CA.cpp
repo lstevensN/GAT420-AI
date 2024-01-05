@@ -14,18 +14,21 @@ void CA::Step()
 	Write<uint8_t>(buffer, size.x / 2, 0, 1);
 
 	// rule 30 = 00011110 (binary)
-	uint8_t rule = 35;
+	uint8_t rule = 30;
 
+	// update buffer
 	for (int y = 0; y < size.y - 1; y++)
 	{
 		for (int x = 0; x < size.x; x++)
 		{
 			uint8_t i = 0;
 			
+			// read surrounding cells (x-1, x, x+2), a value between 0-7 can be created by shifting the bits
 			i |= Read<uint8_t>(buffer, x - 1, y) << 2;
 			i |= Read<uint8_t>(buffer, x, y) << 1;
 			i |= Read<uint8_t>(buffer, x + 1, y) << 0;
 
+			// elementary cellular automata rules
 			uint8_t state = (rule & 1 << i) ? 1 : 0;
 			Write<uint8_t>(buffer, x, y + 1, state);
 		}
