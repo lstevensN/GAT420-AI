@@ -13,8 +13,11 @@ void Cells::Step()
 	// "draw" onto buffer
 	if (mouse_button[1])
 	{
-		Write<uint8_t>(buffer, mouse_position.x, mouse_position.y, 255);
+		Write<uint8_t>(buffer, mouse_position.x, mouse_position.y, 1);
 	}
+
+	// rule 30 = 00011110 (binary)
+	uint8_t rule[] = { 0, 0, 0, 1, 1, 1, 1, 0 };
 
 	// convert buffer data format to color buffer
 	std::transform(buffer.begin(), buffer.end(), color_buffer.begin(), [](uint8_t v)
