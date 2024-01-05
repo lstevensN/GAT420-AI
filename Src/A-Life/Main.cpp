@@ -26,6 +26,7 @@ int main(int, char**)
 	env->Initialize();
 
 	bool quit = false;
+	int timescale = 250000, timer = 0;
 	while (!quit)
 	{
 		// sdl events
@@ -55,12 +56,18 @@ int main(int, char**)
 			break;
 		}
 
-		// update environment
-		env->Step();
-		texture->Copy(env->GetColorBuffer());
+		if (timer == timescale)
+		{
+			timer = 0;
 
-		renderer.RenderCopy(texture);
-		renderer.Present();
+			// update environment
+			env->Step();
+			texture->Copy(env->GetColorBuffer());
+
+			renderer.RenderCopy(texture);
+			renderer.Present();
+		}
+		else timer++;
 	}
 
 	renderer.Shutdown();

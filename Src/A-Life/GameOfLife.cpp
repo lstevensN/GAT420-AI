@@ -46,7 +46,6 @@ void GameOfLife::Step()
                 if (weight < 2) Write<uint8_t>(writeBuffer, x, y, 0);
                 else if (weight == 2 || weight == 3) Write<uint8_t>(writeBuffer, x, y, 1);
                 else if (weight > 3) Write<uint8_t>(writeBuffer, x, y, 0);
-                // ...
             }
             else
             {
